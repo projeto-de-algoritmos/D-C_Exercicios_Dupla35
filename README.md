@@ -15,7 +15,8 @@ Exercícios relacionados aos assuntos abordados na disciplina no módulo de Divi
 ## Screenshots
 ![Screenshot 1](./assets/ex1.png)
 ![Screenshot 2](./assets/ex2.png)
-
+![Screenshot 3](./assets/countimg.png)
+![Screenshot 4](./assets/multiplyimg.png)
 
 ## Instalação 
 **Linguagem**: Javascript<br>
