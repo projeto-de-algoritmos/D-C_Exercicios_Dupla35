@@ -1,36 +1,37 @@
-const multiply = function(num1, num2) {
-  // Cria um array de zeros com um tamanho suficiente para armazenar o resultado
-  const resultArray = [...Array(num1.length + num2.length)].fill(0);
-  // Itera pelos dígitos de num1 em ordem reversa
-  for (let i = num1.length - 1; i >= 0; i--) {
-    // Itera pelos dígitos de num2 em ordem reversa
-    for (let j = num2.length - 1; j >= 0; j--) {
-    // Obtém o dígito anteriormente armazenado no resultado
-      const previousRemainder = resultArray[i + j + 1];
-      // Calcula o produto do dígito atual de num1 e num2, adicionado ao dígito anterior
-      const product = num1[i] * num2[j] + previousRemainder;
-      // Obtém o dígito das unidades do produto
-      const unitsDigit = product % 10;
-      // Obtém o valor a ser carregado para o próximo dígito
-      const carryOver = Math.floor(product / 10);
-      // Armazena o dígito das unidades no resultado
-      resultArray[i + j + 1] = unitsDigit;
-      // Adiciona o valor a ser carregado para o próximo dígito
-      resultArray[i + j] += carryOver;
+function multiply(num1, num2) {
+    // Função auxiliar para adicionar dois números representados como strings
+    function add(lhs, rhs) {
+      // Função auxiliar para alinhar as strings, preenchendo com zeros à esquerda, se necessário
+      function alignStr(left, right) {
+        const maxLen = Math.max(left.length, right.length);
+        return [
+          '0'.repeat(maxLen - left.length) + left,
+          '0'.repeat(maxLen - right.length) + right
+        ];
+      }
+  
+      const [lhsAligned, rhsAligned] = alignStr(lhs, rhs);
+      const res = [];
+      let carry = 0;
+      // Percorre as strings da direita para a esquerda
+      for (let i = lhsAligned.length - 1; i >= 0; i--) {
+        const l = lhsAligned.charCodeAt(i) - 48; // Converte o caractere para o valor numérico
+        const r = rhsAligned.charCodeAt(i) - 48; // Converte o caractere para o valor numérico
+        const val = l + r + carry; // Soma os dígitos e o carry anterior
+        if (val >= 10) {
+          res.push(String.fromCharCode(val - 10 + 48)); // Adiciona o dígito resultante (valor - 10) como caractere
+          carry = 1; // Define o carry para a próxima iteração
+        } else {
+          res.push(String.fromCharCode(val + 48)); // Adiciona o dígito resultante como caractere
+          carry = 0; // Define o carry para zero
+        }
+      }
+      if (carry === 1) {
+        res.push('1'); // Se houver um carry final, adiciona-o como dígito adicional
+      }
+      res.reverse(); // Inverte o vetor resultante para obter a representação correta do número
+      return res.join(''); // Converte o vetor de dígitos em uma string
     }
-  }
-
-  // Remove os zeros à esquerda do resultado
-  let leadingZeroesIndex = 0;
-  while (resultArray[leadingZeroesIndex] === 0) {
-    resultArray.shift();
-  }
   
-  // Se o resultado estiver vazio, retorna "0"
-  if (!resultArray.length) {
-    return "0";
+    return res; // Retorna o resultado
   }
-  
-  // Retorna o resultado como uma string
-  return resultArray.join("");
-};
