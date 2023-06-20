@@ -39,5 +39,14 @@ var countSmaller = function(nums) {
       }
 
     return merged;
-  }
+    }
+
+
+   // Cria um array de pares (valor, índice) para realizar o merge sort com contagem de inversões
+   var indexedNums = nums.map((value, index) => [value, index]);
+  
+   // Aplica o merge sort com contagem de inversões
+   mergeSort(indexedNums);
+   
+   return result;
 };
