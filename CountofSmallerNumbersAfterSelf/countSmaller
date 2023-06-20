@@ -24,6 +24,20 @@ var countSmaller = function(nums) {
     var i = 0;
     var j = 0;
     
+    while (i < sortedLeft.length || j < sortedRight.length) {
+        if (j === sortedRight.length || (i < sortedLeft.length && sortedLeft[i][0] <= sortedRight[j][0])) {
+          // Adiciona o elemento da metade esquerda
+          merged.push(sortedLeft[i]);
+          result[sortedLeft[i][1]] += inversionCount;
+          i++;
+        } else {
+          // Adiciona o elemento da metade direita
+          merged.push(sortedRight[j]);
+          inversionCount++;
+          j++;
+        }
+      }
+
     return merged;
   }
 };
