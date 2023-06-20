@@ -13,6 +13,8 @@
 Exercícios relacionados aos assuntos abordados na disciplina no módulo de Dividir e Conquistar utilizando os algoritmos passados em aula
 
 ## Screenshots
+![Screenshot 1](./assets/ex1.png)
+![Screenshot 2](./assets/ex2.png)
 
 
 ## Instalação 
