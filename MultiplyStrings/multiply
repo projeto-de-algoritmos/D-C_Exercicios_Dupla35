@@ -1,17 +1,26 @@
 const multiply = function(num1, num2) {
-
+  // Cria um array de zeros com um tamanho suficiente para armazenar o resultado
   const resultArray = [...Array(num1.length + num2.length)].fill(0);
-
+  // Itera pelos dígitos de num1 em ordem reversa
   for (let i = num1.length - 1; i >= 0; i--) {
+    // Itera pelos dígitos de num2 em ordem reversa
     for (let j = num2.length - 1; j >= 0; j--) {
+    // Obtém o dígito anteriormente armazenado no resultado
       const previousRemainder = resultArray[i + j + 1];
+      // Calcula o produto do dígito atual de num1 e num2, adicionado ao dígito anterior
       const product = num1[i] * num2[j] + previousRemainder;
+      // Obtém o dígito das unidades do produto
       const unitsDigit = product % 10;
+      // Obtém o valor a ser carregado para o próximo dígito
       const carryOver = Math.floor(product / 10);
+      // Armazena o dígito das unidades no resultado
       resultArray[i + j + 1] = unitsDigit;
+      // Adiciona o valor a ser carregado para o próximo dígito
       resultArray[i + j] += carryOver;
     }
   }
+
+  // Remove os zeros à esquerda do resultado
   let leadingZeroesIndex = 0;
   while (resultArray[leadingZeroesIndex] === 0) {
     resultArray.shift();
