@@ -12,6 +12,16 @@ const multiply = function(num1, num2) {
       resultArray[i + j] += carryOver;
     }
   }
+  let leadingZeroesIndex = 0;
+  while (resultArray[leadingZeroesIndex] === 0) {
+    resultArray.shift();
+  }
   
-  return 0;
+  // Se o resultado estiver vazio, retorna "0"
+  if (!resultArray.length) {
+    return "0";
+  }
+  
+  // Retorna o resultado como uma string
+  return resultArray.join("");
 };
